@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="vi">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>MLN 131 — Học Thông Minh (Nâng cấp)</title>
+
+    <!-- Modern font -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="app">
+    <header class="app-header">
+        <div class="header-left">
+            <h1 class="site-title">MLN 131 — Học Thông Minh</h1>
+            <p class="site-sub">Ứng dụng đọc & luyện tập — nội dung chính trị</p>
+        </div>
+        <nav class="header-nav" aria-label="main navigation">
+            <button class="nav-tab active" data-view="content" aria-pressed="true">📚 Nội dung</button>
+            <button class="nav-tab" data-view="quiz" aria-pressed="false">❓ Câu hỏi</button>
+            <button class="nav-tab" data-view="flashcard" aria-pressed="false">🎴 Flashcard</button>
+        </nav>
+    </header>
+
+    <main class="main-area">
+        <aside class="sidebar" id="sidebar">
+            <div class="search-wrap">
+                <input id="searchInput" placeholder="🔎 Tìm kiếm nội dung..." aria-label="Tìm kiếm" />
+            </div>
+            <ul id="tocList" class="toc-list" aria-label="Mục lục"></ul>
+            <div class="progress-area">
+                <small>Tiến độ đọc</small>
+                <div class="progress">
+                    <div id="progressBar" class="progress-bar" style="width:0%"></div>
+                </div>
+            </div>
+        </aside>
+
+        <section class="content-wrap">
+            <div id="contentView" class="view-content view visible" role="region" aria-label="Nội dung"></div>
+            <div id="quizView" class="view-quiz view hidden" role="region" aria-label="Quiz"></div>
+            <div id="flashcardView" class="view-flashcard view hidden" role="region" aria-label="Flashcard"></div>
+        </section>
+    </main>
+
+    <!-- TTS & nav controls floating -->
+    <div class="floating-controls">
+        <div class="tts-controls" role="group" aria-label="điều khiển giọng đọc">
+            <button id="playPauseBtn" class="btn tts-btn" title="Phát/Tạm dừng">▶️</button>
+            <button id="stopBtn" class="btn tts-btn hidden" title="Dừng">⏹️</button>
+            <button id="prevSection" class="btn tts-btn" title="Phần trước">⏮️</button>
+            <button id="nextSection" class="btn tts-btn" title="Phần tiếp">⏭️</button>
+        </div>
+    </div>
+</div>
+
+<script src="script.js" defer></script>
+</body>
+</html>
