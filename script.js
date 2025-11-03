@@ -204,10 +204,17 @@ function renderContent() {
       <h2>${s.title}</h2>
       ${s.image ? `<img src="${s.image}" class="section-image" alt="">` : ''}
       ${s.html}
-      <button class="read-btn" data-id="${s.id}">▶️ Đọc phần này</button>
+      <div style="margin-top:10px;">
+        <button class="read-btn" data-id="${s.id}">▶️ Đọc phần này</button>
+        <button class="pause-btn hidden" data-id="${s.id}">⏸️ Tạm dừng</button>
+      </div>
     </article>
   `).join('');
     view.querySelectorAll('.read-btn').forEach(btn => btn.onclick = () => speakSection(btn.dataset.id));
+    view.querySelectorAll('.pause-btn').forEach(btn => btn.onclick = (e) => {
+        const id = btn.dataset.id;
+        togglePauseForSection(id);
+    });
 }
 
 // === SEARCH ===
@@ -277,17 +284,23 @@ function renderFlashcard() {
 
 // === TTS CẢI TIẾN (CÓ SEEK BAR + HIGHLIGHT + TUA NHƯ SPOTIFY) ===
 let utterance = null, sentences = [], idx = 0, activeSection = null, seekBar = null, isUserSeeking = false;
+let activeSectionId = null; // track id for UI sync
 
 function speakSection(id) {
-  // stop any existing speech
+  // if speaking another section, cancel and start this one
   if ('speechSynthesis' in window) speechSynthesis.cancel();
 
   const section = document.getElementById(id);
   if (!section) return;
   activeSection = section;
+  activeSectionId = id;
 
   // remove old seek bars
   section.querySelectorAll('.seek-bar').forEach(e => e.remove());
+
+  // hide all per-section pause buttons, then show this one's pause
+  hideAllPauseButtons();
+  showPauseButtonFor(id, true); // show as "pause" while starting
 
   // create seek bar
   const bar = document.createElement('div');
@@ -313,13 +326,19 @@ function speakSection(id) {
     readNextSentence(section);
   });
 
+  updateFloatingPlayPause(true);
   readNextSentence(section);
 }
 
 function readNextSentence(section) {
-  if (idx >= sentences.length) {
+  if( idx >= sentences.length) {
     clearHighlight(section);
     if (seekBar) seekBar.value = 100;
+    // finished reading: hide per-section pause button
+    hideAllPauseButtons();
+    activeSection = null;
+    activeSectionId = null;
+    updateFloatingPlayPause(false);
     return;
   }
 
@@ -347,29 +366,140 @@ function readNextSentence(section) {
   speechSynthesis.speak(utterance);
 }
 
-function highlightSentence(section, sentence) {
-  const allTextNodes = Array.from(section.querySelectorAll('p, li, h3, h4'));
-  const target = allTextNodes.find(el => el.innerText.includes(sentence.slice(0, 10)));
-  if (target) target.classList.add('highlight-reading');
+// per-section pause helpers
+function togglePauseForSection(id) {
+    // if not the active section, start it
+    if (activeSectionId !== id) {
+        speakSection(id);
+        return;
+    }
+    if (!('speechSynthesis' in window)) return;
+    const btn = document.querySelector(`.pause-btn[data-id="${id}"]`);
+    if (speechSynthesis.speaking && !speechSynthesis.paused) {
+        speechSynthesis.pause();
+        if (btn) btn.innerText = '▶️ Tiếp tục';
+        updateFloatingPlayPause(false);
+    } else if (speechSynthesis.paused) {
+        speechSynthesis.resume();
+        if (btn) btn.innerText = '⏸️ Tạm dừng';
+        updateFloatingPlayPause(true);
+    }
 }
 
-function clearHighlight(section) {
-  section.querySelectorAll('.highlight-reading').forEach(el => el.classList.remove('highlight-reading'));
+function showPauseButtonFor(id, asPlaying = false) {
+    hideAllPauseButtons();
+    const btn = document.querySelector(`.pause-btn[data-id="${id}"]`);
+    if (btn) {
+        btn.classList.remove('hidden');
+        btn.innerText = asPlaying ? '⏸️ Tạm dừng' : '▶️ Tiếp tục';
+    }
 }
 
-// === HELPER ===
-function scrollToSection(id){
-    document.getElementById(id)?.scrollIntoView({behavior:'smooth'});
+function hideAllPauseButtons(){
+    document.querySelectorAll('.pause-btn').forEach(b => b.classList.add('hidden'));
 }
+
+// highlight the exact sentence inside a section (simple first-occurrence replace)
+function escapeRegExp(str) {
+    return str.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+}
+function highlightSentence(section, sentence){
+    if(!section || !sentence) return;
+    // try to replace first exact occurrence in innerHTML (best-effort)
+    try {
+        const html = section.innerHTML;
+        const esc = escapeRegExp(sentence);
+        const re = new RegExp(esc);
+        if(re.test(html)){
+            section.innerHTML = html.replace(re, `<span class="highlight-reading">${sentence}</span>`);
+        } else {
+            // fallback: wrap first matching word fragment
+            const firstWord = sentence.split(/\s+/)[0];
+            const re2 = new RegExp(escapeRegExp(firstWord));
+            section.innerHTML = html.replace(re2, `<span class="highlight-reading">${firstWord}</span>`);
+        }
+    } catch (e) {
+        // silent fail-safe
+    }
+}
+
+function clearHighlight(section){
+    if(!section) return;
+    section.querySelectorAll('.highlight-reading').forEach(sp => {
+        const txt = document.createTextNode(sp.textContent);
+        sp.parentNode.replaceChild(txt, sp);
+    });
+}
+
+// update floating play/pause button state and stop button visibility
+function updateFloatingPlayPause(isPlaying){
+    const fp = document.getElementById('playPauseBtn');
+    const stop = document.getElementById('stopBtn');
+    if (!fp) return;
+    fp.innerText = isPlaying ? '⏸️' : '▶️';
+    if(stop) stop.classList.toggle('hidden', !isPlaying);
+}
+
+// wire floating controls (play/pause/stop/prev/next)
 function setupListeners(){
-    document.getElementById('playPauseBtn').onclick=()=>speechSynthesis.paused?speechSynthesis.resume():speechSynthesis.pause();
-    document.getElementById('stopBtn').onclick=()=>speechSynthesis.cancel();
-    document.getElementById('prevSection').onclick=()=>navigate(-1);
-    document.getElementById('nextSection').onclick=()=>navigate(1);
+    const playPause = document.getElementById('playPauseBtn');
+    const stopBtn = document.getElementById('stopBtn');
+    const prev = document.getElementById('prevSection');
+    const next = document.getElementById('nextSection');
+
+    if(playPause) playPause.onclick = ()=>{
+        if (!('speechSynthesis' in window)) return;
+        // if nothing active, start current section or first
+        if (!speechSynthesis.speaking && !speechSynthesis.paused) {
+            const startId = state.currentSectionId || contentData[0].id;
+            speakSection(startId);
+            return;
+        }
+        if (speechSynthesis.paused) {
+            speechSynthesis.resume();
+            updateFloatingPlayPause(true);
+            if (activeSectionId) {
+                const pb = document.querySelector(`.pause-btn[data-id="${activeSectionId}"]`);
+                if (pb) pb.innerText = '⏸️ Tạm dừng';
+            }
+        } else {
+            speechSynthesis.pause();
+            updateFloatingPlayPause(false);
+            if (activeSectionId) {
+                const pb = document.querySelector(`.pause-btn[data-id="${activeSectionId}"]`);
+                if (pb) pb.innerText = '▶️ Tiếp tục';
+            }
+        }
+    };
+
+    if(stopBtn) stopBtn.onclick = ()=>{
+        if('speechSynthesis' in window) speechSynthesis.cancel();
+        hideAllPauseButtons();
+        activeSectionId = null;
+        state.currentSectionId = null;
+        updateFloatingPlayPause(false);
+    };
+
+    if(prev) prev.onclick = ()=> navigate(-1);
+    if(next) next.onclick = ()=> navigate(1);
 }
+
+// navigate between sections by index and start reading the target
 function navigate(dir){
-    const ids=contentData.map(c=>c.id);
-    const cur=document.querySelector('.toc-link.active');const i=ids.indexOf(cur?.dataset.id);
-    const ni=Math.max(0,Math.min(ids.length-1,i+dir));
-    speakSection(ids[ni]);
+    const ids = contentData.map(s => s.id);
+    let cur = activeSectionId || state.currentSectionId || ids[0];
+    let i = ids.indexOf(cur);
+    if(i === -1) i = 0;
+    const ni = (i + dir + ids.length) % ids.length;
+    const nextId = ids[ni];
+    scrollToSection(nextId);
+    speakSection(nextId);
+}
+
+// smooth scroll and update TOC active state
+function scrollToSection(id){
+    const el = document.getElementById(id);
+    if(el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    state.currentSectionId = id;
+    document.querySelectorAll('.toc-link').forEach(l=> l.classList.toggle('active', l.dataset.id === id));
 }

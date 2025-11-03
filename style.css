@@ -143,30 +143,40 @@ body{
 /* Section styles */
 .section{ margin-bottom:20px; padding-bottom:8px; border-bottom:1px dashed #f0f0f3 }
 .section h2{ font-size:1.05rem; color:var(--accent-1); margin:10px 0 }
-.section .section-image{ width:100%; max-height:220px; object-fit:cover; border-radius:10px; box-shadow: 0 6px 18px rgba(15,23,42,0.06) }
-.read-btn{
+/* enlarge images a bit */
+.section .section-image{ width:100%; max-height:320px; object-fit:cover; border-radius:10px; box-shadow: 0 6px 18px rgba(15,23,42,0.06) }
+
+/* per-section pause button */
+.pause-btn{
     background:transparent;
-    border:1px solid var(--accent-1);
-    color:var(--accent-1);
+    border:1px solid #6b7280;
+    color:#6b7280;
     padding:6px 10px;
     border-radius:999px;
     cursor:pointer;
     font-weight:600;
-    transition: all 240ms;
+    margin-left:8px;
+    transition: all 200ms ease;
 }
-.read-btn:hover{ background:linear-gradient(90deg,var(--accent-1),var(--accent-2)); color:#fff; transform:translateY(-3px) }
+.pause-btn.hidden{ display:none; }
 
-/* speaking highlight */
-.speaking{
-    padding:2px 6px;
-    border-radius:6px;
-    box-shadow: 0 6px 18px rgba(255,193,7,0.06);
-    animation: pulseHighlight 1.6s ease-in-out infinite;
+/* Reading progress */
+.reading-progress {
+  position: relative;
+  height: 4px;
+  background: #e0e0e0;
+  border-radius: 2px;
+  overflow: hidden;
+  margin-top: 10px;
 }
-@keyframes pulseHighlight{
-    0%{ box-shadow: 0 0 0 0 rgba(255,193,7,0.0) }
-    50%{ box-shadow: 0 8px 30px rgba(255,193,7,0.12) }
-    100%{ box-shadow: 0 0 0 0 rgba(255,193,7,0.0) }
+
+.reading-progress .progress-fill {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  background: linear-gradient(90deg, #4caf50, #81c784);
+  transition: width 0.4s ease;
 }
 
 /* Quiz */
