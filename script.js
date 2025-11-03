@@ -155,23 +155,92 @@ const contentData = [
 ];
 
 // ===== QUIZ =====
-const quizData = [
-    { q: "Con đường quá độ lên CNXH ở Việt Nam là sự lựa chọn:", options: ["Duy nhất, đúng đắn, khoa học", "Tạm thời", "Thử nghiệm", "Bắt buộc"], correct: 0 },
-    { q: "Đặc trưng kinh tế của CNXH Việt Nam là:", options: ["Kinh tế tư bản", "Kinh tế nhà nước chủ đạo", "Kinh tế tự do", "Kinh tế phong kiến"], correct: 1 },
-    { q: "Dân chủ XHCN thực hiện quyền lực cho:", options: ["Thiểu số", "Đại đa số nhân dân lao động", "Giai cấp tư sản", "Quý tộc"], correct: 1 },
-    { q: "'Bỏ qua TBCN' có nghĩa là:", options: ["Bỏ qua thành tựu TBCN", "Bỏ qua vị trí thống trị của quan hệ sản xuất TBCN", "Không học hỏi TBCN", "Từ chối công nghệ TBCN"], correct: 1 }
-];
+// ===== QUIZ =====
+const quizDataByPart = {
+    phan1: [
+        { q: "Con đường quá độ lên CNXH ở Việt Nam là sự lựa chọn:", options: ["Duy nhất, đúng đắn, khoa học", "Tạm thời", "Thử nghiệm", "Bắt buộc"], correct: 0 },
+        { q: "'Bỏ qua TBCN' có nghĩa là:", options: ["Bỏ qua thành tựu TBCN", "Bỏ qua vị trí thống trị của quan hệ sản xuất TBCN", "Không học hỏi TBCN", "Từ chối công nghệ TBCN"], correct: 1 },
+        { q: "Thuận lợi lớn nhất khi VN quá độ lên CNXH là:", options: ["Tài nguyên phong phú", "Thời đại quá độ từ TBCN lên CNXH", "Dân số đông", "Diện tích lãnh thổ rộng"], correct: 1 },
+        { q: "Đại hội XIII xác định đến năm 2045 VN sẽ:", options: ["Trở thành nước công nghiệp", "Trở thành nước phát triển, thu nhập cao", "Hoàn thành CNH-HĐH", "Xóa đói giảm nghèo"], correct: 1 }
+    ],
+    phan2: [
+        { q: "Có bao nhiêu đặc trưng cơ bản của CNXH Việt Nam?", options: ["5 đặc trưng", "6 đặc trưng", "7 đặc trưng", "8 đặc trưng"], correct: 3 },
+        { q: "Đặc trưng kinh tế của CNXH Việt Nam là:", options: ["Kinh tế tư bản", "Kinh tế nhà nước chủ đạo", "Kinh tế tự do", "Kinh tế phong kiến"], correct: 1 },
+        { q: "Đặc trưng văn hóa CNXH VN là:", options: ["Văn hóa phương Tây", "Văn hóa tiên tiến, đậm đà bản sắc dân tộc", "Văn hóa truyền thống", "Văn hóa toàn cầu"], correct: 1 },
+        { q: "Nhà nước pháp quyền XHCN do ai lãnh đạo?", options: ["Quốc hội", "Chính phủ", "Đảng Cộng sản", "Nhân dân"], correct: 2 }
+    ],
+    phan3: [
+        { q: "Ba phương hướng cơ bản xây dựng CNXH không bao gồm:", options: ["CNH-HĐH", "Kinh tế thị trường định hướng XHCN", "Phát triển quân sự", "Xây dựng văn hóa - con người"], correct: 2 },
+        { q: "Trong kinh tế thị trường định hướng XHCN, thành phần nào chủ đạo?", options: ["Kinh tế tư nhân", "Kinh tế nhà nước", "Kinh tế tập thể", "Kinh tế FDI"], correct: 1 },
+        { q: "Nông nghiệp cần ứng dụng:", options: ["Phương pháp truyền thống", "Công nghệ cao, nông thôn mới", "Canh tác thủ công", "Kỹ thuật cổ điển"], correct: 1 }
+    ],
+    phan4: [
+        { q: "Từ 'Dân chủ' xuất phát từ ngôn ngữ nào?", options: ["La Tinh", "Hy Lạp cổ đại", "Tiếng Anh", "Tiếng Pháp"], correct: 1 },
+        { q: "Demos + Kratos có nghĩa là:", options: ["Vua chúa trị", "Nhân dân làm chủ", "Quý tộc cai trị", "Pháp luật thống trị"], correct: 1 },
+        { q: "Theo Mác-Lênin, dân chủ là:", options: ["Chế độ bầu cử", "Quyền lực của nhân dân", "Tự do ngôn luận", "Đa nguyên chính trị"], correct: 1 }
+    ],
+    phan5: [
+        { q: "Dân chủ tư sản là dân chủ của:", options: ["Đa số nhân dân", "Thiểu số tư bản", "Giai cấp công nhân", "Nông dân"], correct: 1 },
+        { q: "Sự kiện nào mở ra thời đại dân chủ XHCN?", options: ["Cách mạng Pháp 1789", "Cách mạng Tháng Mười 1917", "Chiến tranh thế giới thứ 2", "Cách mạng Tháng Tám 1945"], correct: 1 },
+        { q: "Dân chủ nguyên thủy có đặc điểm:", options: ["Bầu quốc hội", "Họp toàn dân, bầu thủ lĩnh", "Do vua cai trị", "Chuyên chế"], correct: 1 }
+    ],
+    phan6: [
+        { q: "Dân chủ XHCN ra đời sau sự kiện nào?", options: ["Cách mạng Tháng Mười Nga 1917", "Cách mạng công nghiệp", "Chiến tranh thế giới 1", "Độc lập Mỹ"], correct: 0 },
+        { q: "Ai lãnh đạo Cách mạng Tháng Mười?", options: ["Mác", "Ănghen", "Lênin", "Stálin"], correct: 2 },
+        { q: "Chủ thể của dân chủ XHCN là:", options: ["Trí thức", "Nhân dân lao động", "Tư sản", "Quân đội"], correct: 1 },
+        { q: "Mục tiêu của dân chủ XHCN là:", options: ["Tăng GDP", "Giải phóng con người, xóa bóc lột", "Phát triển thương mại", "Mở rộng lãnh thổ"], correct: 1 }
+    ],
+    phan7: [
+        { q: "Bản chất kinh tế của dân chủ XHCN là:", options: ["Tư hữu tư liệu sản xuất", "Công hữu tư liệu sản xuất chủ yếu", "Kinh tế thị trường tự do", "Kinh tế kế hoạch tập trung"], correct: 1 },
+        { q: "Nguyên tắc phân phối trong CNXH là:", options: ["Theo tài sản", "Theo giai cấp", "Theo lao động", "According to đẳng cấp"], correct: 2 },
+        { q: "Nền tảng tư tưởng của dân chủ XHCN là:", options: ["Chủ nghĩa tự do", "Chủ nghĩa Mác-Lênin", "Nho giáo", "Chủ nghĩa thực dụng"], correct: 1 },
+        { q: "Văn hóa XHCN VN cần:", options: ["Bắt chước phương Tây", "Tiên tiến, đậm đà bản sắc dân tộc", "Bảo thủ truyền thống", "Từ bỏ văn hóa cũ"], correct: 1 }
+    ]
+};
 
-// ===== FLASHCARDS =====
-const flashcards = [
-    { front: "Bỏ qua TBCN nghĩa là gì?", back: "Bỏ qua việc xác lập vị trí thống trị của quan hệ sản xuất TBCN." },
-    { front: "8 đặc trưng CNXH?", back: "Dân giàu, nước mạnh, dân chủ, công bằng, văn minh..." },
-    { front: "Dân chủ XHCN là gì?", back: "Quyền lực thuộc đại đa số nhân dân lao động." },
-    { front: "3 phương hướng xây dựng CNXH?", back: "CNH-HĐH, Kinh tế thị trường XHCN, Văn hóa - Con người." }
-];
+// ===== FLASHCARDS THEO PHẦN =====
+const flashcardsByPart = {
+    phan1: [
+        { front: "Bỏ qua TBCN nghĩa là gì?", back: "Bỏ qua việc xác lập vị trí thống trị của quan hệ sản xuất TBCN." },
+        { front: "Tính tất yếu của quá độ lên CNXH?", back: "Là sự lựa chọn duy nhất, đúng đắn, khoa học, phù hợp quy luật lịch sử và nguyện vọng nhân dân." },
+        { front: "Mục tiêu đến năm 2045?", back: "Việt Nam trở thành nước phát triển, thu nhập cao." }
+    ],
+    phan2: [
+        { front: "8 đặc trưng CNXH?", back: "Dân giàu, nước mạnh, dân chủ, công bằng, văn minh..." },
+        { front: "Đặc trưng kinh tế CNXH Việt Nam?", back: "Kinh tế phát triển cao dựa trên lực lượng sản xuất hiện đại, quan hệ sản xuất tiến bộ." }
+    ],
+    phan3: [
+        { front: "3 phương hướng xây dựng CNXH?", back: "CNH-HĐH, Kinh tế thị trường XHCN, Văn hóa - Con người." }
+    ],
+    phan4: [
+        { front: "Nguồn gốc từ 'Dân chủ'?", back: "Từ Hy Lạp cổ: Demos (nhân dân) + Kratos (cai trị) = Nhân dân làm chủ." }
+    ],
+    phan5: [
+        { front: "Dân chủ XHCN là gì?", back: "Quyền lực thuộc đại đa số nhân dân lao động." },
+        { front: "Dân chủ XHCN khác dân chủ tư sản?", back: "Dân chủ XHCN: của đa số nhân dân lao động. Dân chủ tư sản: của thiểu số tư bản." },
+        { front: "Cách mạng Tháng Mười 1917?", back: "Mở ra thời đại dân chủ XHCN, do Lênin lãnh đạo." }
+    ],
+    phan6: [
+        { front: "Bản chất chính trị dân chủ XHCN?", back: "Chủ thể là nhân dân lao động, do Đảng Cộng sản lãnh đạo, mục tiêu giải phóng con người." }
+    ],
+    phan7: [
+        { front: "Bản chất kinh tế dân chủ XHCN?", back: "Công hữu tư liệu sản xuất chủ yếu, phân phối theo lao động." },
+        { front: "Nền tảng tư tưởng dân chủ XHCN?", back: "Chủ nghĩa Mác-Lênin." },
+        { front: "Đặc điểm văn hóa XHCN Việt Nam?", back: "Tiên tiến, đậm đà bản sắc dân tộc, kế thừa tinh hoa nhân loại." }
+    ]
+};
 
 // ===== STATE =====
-let state = { currentView: 'content', isReading: false, quizIndex: 0, flashcardIndex: 0, currentSectionId: null };
+let state = {
+    currentView: 'content',
+    isReading: false,
+    quizIndex: 0,
+    flashcardIndex: 0,
+    currentSectionId: null,
+    selectedPart: null, // phần được chọn cho quiz/flashcard
+    currentQuizSet: [], // bộ câu hỏi hiện tại
+    currentFlashcardSet: [] // bộ flashcard hiện tại
+};
 
 // ====== CHẠY SAU KHI TẢI ======
 document.addEventListener('DOMContentLoaded', init);
@@ -180,106 +249,204 @@ function init() {
     renderTOC();
     renderContent();
     setupListeners();
+    renderPartSelector(); // Thêm chọn phần
     renderQuiz();
     renderFlashcard();
 }
 
-// === TOC & CONTENT ===
-function renderTOC() {
-    const toc = document.getElementById('tocList');
-    toc.innerHTML = contentData.map(s => `<li><a class="toc-link" href="#${s.id}" data-id="${s.id}">${s.title}</a></li>`).join('');
-    toc.querySelectorAll('.toc-link').forEach(link => {
-        link.onclick = e => {
-            e.preventDefault();
-            scrollToSection(link.dataset.id);
-            speakSection(link.dataset.id);
-        };
-    });
-}
+// === RENDER PART SELECTOR ===
+function renderPartSelector() {
+    // Tạo selector cho quiz
+    const quizView = document.getElementById('quizView');
+    const flashcardView = document.getElementById('flashcardView');
 
-function renderContent() {
-    const view = document.getElementById('contentView');
-    view.innerHTML = contentData.map(s => `
-    <article id="${s.id}" class="section fade-in">
-      <h2>${s.title}</h2>
-      ${s.image ? `<img src="${s.image}" class="section-image" alt="">` : ''}
-      ${s.html}
-      <div style="margin-top:10px;">
-        <button class="read-btn" data-id="${s.id}">▶️ Đọc phần này</button>
-        <button class="pause-btn hidden" data-id="${s.id}">⏸️ Tạm dừng</button>
-      </div>
-    </article>
-  `).join('');
-    view.querySelectorAll('.read-btn').forEach(btn => btn.onclick = () => speakSection(btn.dataset.id));
-    view.querySelectorAll('.pause-btn').forEach(btn => btn.onclick = (e) => {
-        const id = btn.dataset.id;
-        togglePauseForSection(id);
-    });
-}
-
-// === SEARCH ===
-document.getElementById('searchInput').oninput = e => {
-    const term = e.target.value.toLowerCase();
-    document.querySelectorAll('.section').forEach(sec => {
-        sec.style.display = sec.textContent.toLowerCase().includes(term) ? 'block' : 'none';
-    });
-};
-
-// === VIEW SWITCH ===
-document.querySelectorAll('.nav-tab').forEach(tab => {
-    tab.onclick = () => {
-        const view = tab.dataset.view;
-        document.querySelectorAll('.nav-tab').forEach(t => t.classList.toggle('active', t === tab));
-        document.querySelectorAll('#contentView,#quizView,#flashcardView').forEach(v => v.classList.add('hidden'));
-        document.getElementById(view + 'View').classList.remove('hidden');
-        state.currentView = view;
-    };
-});
-
-// === QUIZ ===
-function renderQuiz() {
-    const qv = document.getElementById('quizView');
-    const q = quizData[state.quizIndex];
-    qv.innerHTML = `
-    <div class="quiz-container fade-in">
-      <h3>Câu ${state.quizIndex + 1}/${quizData.length}</h3>
-      <p>${q.q}</p>
-      <ul class="options">
-        ${q.options.map((o,i)=>`<li class="option" data-i="${i}">${o}</li>`).join('')}
-      </ul>
-      <button id="nextQ">Tiếp ➡️</button>
-    </div>`;
-    qv.querySelectorAll('.option').forEach(opt=>opt.onclick=()=>checkAnswer(opt,q.correct));
-    document.getElementById('nextQ').onclick=()=>{state.quizIndex=(state.quizIndex+1)%quizData.length;renderQuiz();}
-}
-function checkAnswer(opt,correct){
-    document.querySelectorAll('.option').forEach(o=>o.style.pointerEvents='none');
-    if(+opt.dataset.i===correct) opt.style.background='#c8f7c5'; else opt.style.background='#fbb';
-}
-
-// === FLASHCARDS ===
-function renderFlashcard() {
-    const fv=document.getElementById('flashcardView');
-    const card=flashcards[state.flashcardIndex];
-    fv.innerHTML=`
-    <div class="flashcard-container fade-in">
-      <div class="flashcard" id="flash">
-        <div class="flashcard-inner">
-          <div class="card-face front">${card.front}</div>
-          <div class="card-face back">${card.back}</div>
+    const partSelectorHTML = `
+        <div class="part-selector">
+            <select class="part-select" id="quizPartSelect">
+                <option value="">-- Chọn phần để luyện tập --</option>
+                ${contentData.map(part => `<option value="${part.id}">${part.title}</option>`).join('')}
+            </select>
+            <button id="startQuiz" class="btn tts-btn">Bắt đầu làm bài</button>
         </div>
-      </div>
-      <div class="flash-controls">
-        <button id="prevF">⬅️</button>
-        <button id="flipF">🔄</button>
-        <button id="nextF">➡️</button>
-      </div>
-    </div>`;
-    const flash=fv.querySelector('#flash');
-    flash.onclick=()=>flash.classList.toggle('flipped');
-    fv.querySelector('#flipF').onclick=()=>flash.classList.toggle('flipped');
-    fv.querySelector('#prevF').onclick=()=>{state.flashcardIndex=(state.flashcardIndex-1+flashcards.length)%flashcards.length;renderFlashcard();};
-    fv.querySelector('#nextF').onclick=()=>{state.flashcardIndex=(state.flashcardIndex+1)%flashcards.length;renderFlashcard();};
+        <div id="quizContainer" class="hidden"></div>
+    `;
+
+    const flashcardSelectorHTML = `
+        <div class="part-selector">
+            <select class="part-select" id="flashcardPartSelect">
+                <option value="">-- Chọn phần để học flashcard --</option>
+                ${contentData.map(part => `<option value="${part.id}">${part.title}</option>`).join('')}
+            </select>
+            <button id="startFlashcard" class="btn tts-btn">Bắt đầu học</button>
+        </div>
+        <div id="flashcardContainer" class="hidden"></div>
+    `;
+
+    quizView.innerHTML = partSelectorHTML;
+    flashcardView.innerHTML = flashcardSelectorHTML;
+
+    // Event listeners
+    document.getElementById('startQuiz').onclick = () => {
+        const partId = document.getElementById('quizPartSelect').value;
+        if (partId) {
+            state.selectedPart = partId;
+            state.currentQuizSet = quizDataByPart[partId] || [];
+            state.quizIndex = 0;
+            renderQuizQuestions();
+        }
+    };
+
+    document.getElementById('startFlashcard').onclick = () => {
+        const partId = document.getElementById('flashcardPartSelect').value;
+        if (partId) {
+            state.selectedPart = partId;
+            state.currentFlashcardSet = flashcardsByPart[partId] || [];
+            state.flashcardIndex = 0;
+            renderFlashcardContent();
+        }
+    };
+}
+
+// === RENDER QUIZ QUESTIONS ===
+function renderQuizQuestions() {
+    if (state.currentQuizSet.length === 0) {
+        document.getElementById('quizContainer').innerHTML = '<p>Chưa có câu hỏi cho phần này.</p>';
+        return;
+    }
+
+    const q = state.currentQuizSet[state.quizIndex];
+    const partTitle = contentData.find(p => p.id === state.selectedPart)?.title || 'Unknown Part';
+
+    const quizHTML = `
+        <div class="quiz-container fade-in">
+            <h3>Câu ${state.quizIndex + 1}/${state.currentQuizSet.length} - ${partTitle}</h3>
+            <p>${q.q}</p>
+            <ul class="options">
+                ${q.options.map((o,i) => `<li class="option" data-i="${i}">${o}</li>`).join('')}
+            </ul>
+            <div class="quiz-controls">
+                <button id="prevQ" ${state.quizIndex === 0 ? 'disabled' : ''}>⬅️ Câu trước</button>
+                <button id="nextQ">${state.quizIndex === state.currentQuizSet.length - 1 ? 'Kết thúc' : 'Câu tiếp ➡️'}</button>
+            </div>
+        </div>
+    `;
+
+    document.getElementById('quizContainer').innerHTML = quizHTML;
+    document.getElementById('quizContainer').classList.remove('hidden');
+
+    // Event listeners
+    document.querySelectorAll('.option').forEach(opt =>
+        opt.onclick = () => checkAnswer(opt, q.correct)
+    );
+
+    document.getElementById('prevQ').onclick = () => {
+        state.quizIndex = Math.max(0, state.quizIndex - 1);
+        renderQuizQuestions();
+    };
+
+    document.getElementById('nextQ').onclick = () => {
+        if (state.quizIndex < state.currentQuizSet.length - 1) {
+            state.quizIndex++;
+            renderQuizQuestions();
+        } else {
+            // Kết thúc quiz
+            document.getElementById('quizContainer').innerHTML = `
+                <div class="quiz-complete">
+                    <h3>🎉 Hoàn thành bài quiz!</h3>
+                    <p>Bạn đã hoàn thành ${state.currentQuizSet.length} câu hỏi của phần "${partTitle}"</p>
+                    <button onclick="state.quizIndex = 0; renderQuizQuestions();">Làm lại</button>
+                    <button onclick="location.reload();">Chọn phần khác</button>
+                </div>
+            `;
+        }
+    };
+}
+
+// === RENDER FLASHCARD CONTENT ===
+function renderFlashcardContent() {
+    if (state.currentFlashcardSet.length === 0) {
+        document.getElementById('flashcardContainer').innerHTML = '<p>Chưa có flashcard cho phần này.</p>';
+        return;
+    }
+
+    const card = state.currentFlashcardSet[state.flashcardIndex];
+    const partTitle = contentData.find(p => p.id === state.selectedPart)?.title || 'Unknown Part';
+
+    const flashcardHTML = `
+        <div class="flashcard-container fade-in">
+            <h3>Flashcard ${state.flashcardIndex + 1}/${state.currentFlashcardSet.length} - ${partTitle}</h3>
+            <div class="flashcard" id="flash">
+                <div class="flashcard-inner">
+                    <div class="card-face front">${card.front}</div>
+                    <div class="card-face back">${card.back}</div>
+                </div>
+            </div>
+            <div class="flash-controls">
+                <button id="prevF" ${state.flashcardIndex === 0 ? 'disabled' : ''}>⬅️ Trước</button>
+                <button id="flipF">🔄 Lật thẻ</button>
+                <button id="nextF">${state.flashcardIndex === state.currentFlashcardSet.length - 1 ? 'Kết thúc' : 'Tiếp ➡️'}</button>
+            </div>
+        </div>
+    `;
+
+    document.getElementById('flashcardContainer').innerHTML = flashcardHTML;
+    document.getElementById('flashcardContainer').classList.remove('hidden');
+
+    const flash = document.getElementById('flash');
+    flash.onclick = () => flash.classList.toggle('flipped');
+    document.getElementById('flipF').onclick = () => flash.classList.toggle('flipped');
+
+    document.getElementById('prevF').onclick = () => {
+        state.flashcardIndex = Math.max(0, state.flashcardIndex - 1);
+        renderFlashcardContent();
+    };
+
+    document.getElementById('nextF').onclick = () => {
+        if (state.flashcardIndex < state.currentFlashcardSet.length - 1) {
+            state.flashcardIndex++;
+            renderFlashcardContent();
+        } else {
+            // Kết thúc flashcard
+            document.getElementById('flashcardContainer').innerHTML = `
+                <div class="flashcard-complete">
+                    <h3>🎉 Hoàn thành flashcard!</h3>
+                    <p>Bạn đã học ${state.currentFlashcardSet.length} thẻ của phần "${partTitle}"</p>
+                    <button onclick="state.flashcardIndex = 0; renderFlashcardContent();">Học lại</button>
+                    <button onclick="location.reload();">Chọn phần khác</button>
+                </div>
+            `;
+        }
+    };
+}
+
+// === CÁC HÀM KHÁC GIỮ NGUYÊN ===
+function checkAnswer(opt, correct) {
+    document.querySelectorAll('.option').forEach(o => o.style.pointerEvents = 'none');
+    if (+opt.dataset.i === correct) {
+        opt.style.background = '#c8f7c5';
+        opt.style.borderColor = '#9ad39a';
+    } else {
+        opt.style.background = '#fbb';
+        opt.style.borderColor = '#f59a9a';
+        // Highlight đáp án đúng
+        document.querySelectorAll('.option').forEach(o => {
+            if (+o.dataset.i === correct) {
+                o.style.background = '#c8f7c5';
+                o.style.borderColor = '#9ad39a';
+            }
+        });
+    }
+}
+
+// Các hàm renderQuiz và renderFlashcard cũ có thể xóa hoặc giữ làm backup
+function renderQuiz() {
+    // Giữ lại cho tương thích, nhưng sẽ không dùng nữa
+    renderPartSelector();
+}
+
+function renderFlashcard() {
+    // Giữ lại cho tương thích, nhưng sẽ không dùng nữa
+    renderPartSelector();
 }
 
 // === TTS CẢI TIẾN (CÓ SEEK BAR + HIGHLIGHT + TUA NHƯ SPOTIFY) ===
@@ -503,3 +670,70 @@ function scrollToSection(id){
     state.currentSectionId = id;
     document.querySelectorAll('.toc-link').forEach(l=> l.classList.toggle('active', l.dataset.id === id));
 }
+
+// === TOC & CONTENT ===
+function renderTOC() {
+    const toc = document.getElementById('tocList');
+    if(!toc) return;
+    toc.innerHTML = contentData.map(s => `<li><a class="toc-link" href="#${s.id}" data-id="${s.id}">${s.title}</a></li>`).join('');
+    toc.querySelectorAll('.toc-link').forEach(link => {
+        link.onclick = e => {
+            e.preventDefault();
+            scrollToSection(link.dataset.id);
+            speakSection(link.dataset.id);
+        };
+    });
+}
+
+function renderContent() {
+    const view = document.getElementById('contentView');
+    if(!view) return;
+    view.innerHTML = contentData.map(s => `
+    <article id="${s.id}" class="section fade-in">
+      <h2>${s.title}</h2>
+      ${s.image ? `<img src="${s.image}" class="section-image" alt="">` : ''}
+      ${s.html}
+      <div style="margin-top:10px;">
+        <button class="read-btn" data-id="${s.id}">▶️ Đọc phần này</button>
+        <button class="pause-btn hidden" data-id="${s.id}">⏸️ Tạm dừng</button>
+      </div>
+    </article>
+  `).join('');
+    view.querySelectorAll('.read-btn').forEach(btn => btn.onclick = () => {
+        state.currentSectionId = btn.dataset.id;
+        speakSection(btn.dataset.id);
+    });
+    view.querySelectorAll('.pause-btn').forEach(btn => btn.onclick = () => {
+        const id = btn.dataset.id;
+        togglePauseForSection(id);
+    });
+}
+
+// === SEARCH ===
+const searchInput = document.getElementById('searchInput');
+if (searchInput) {
+    searchInput.oninput = e => {
+        const term = e.target.value.toLowerCase();
+        document.querySelectorAll('.section').forEach(sec => {
+            sec.style.display = sec.textContent.toLowerCase().includes(term) ? 'block' : 'none';
+        });
+    };
+}
+
+// === VIEW SWITCH ===
+document.querySelectorAll('.nav-tab').forEach(tab => {
+    tab.onclick = () => {
+        const view = tab.dataset.view;
+        document.querySelectorAll('.nav-tab').forEach(t => t.classList.toggle('active', t === tab));
+        document.querySelectorAll('#contentView,#quizView,#flashcardView').forEach(v => v.classList.add('hidden'));
+        const target = document.getElementById(view + 'View');
+        if (target) target.classList.remove('hidden');
+        state.currentView = view;
+
+        // Reset to part selector when switching to quiz/flashcard
+        if (view === 'quiz' || view === 'flashcard') {
+            renderPartSelector();
+        }
+    };
+});
+

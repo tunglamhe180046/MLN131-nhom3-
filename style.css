@@ -352,3 +352,124 @@ body{
   background: #fff59d;
   transition: background 0.3s ease;
 }
+/* Part selector styling */
+.part-selector {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.part-select {
+    padding: 8px 14px;
+    border-radius: 8px;
+    border: 1px solid #e0e0e0;
+    background: white;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    outline: none;
+}
+
+.part-select:hover {
+    border-color: var(--accent-1);
+    box-shadow: 0 2px 8px rgba(211, 47, 47, 0.1);
+}
+
+.part-select:focus {
+    border-color: var(--accent-1);
+    box-shadow: 0 0 0 3px rgba(211, 47, 47, 0.1);
+}
+
+/* Quiz */
+.quiz-container{ padding:18px; border-radius:12px; background:#fbfbff }
+/* Part selector styling */
+.part-selector {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 20px;
+    padding: 20px;
+    background: #f8f9fa;
+    border-radius: 12px;
+}
+
+.part-select {
+    padding: 10px 16px;
+    border-radius: 8px;
+    border: 1px solid #e0e0e0;
+    background: white;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    outline: none;
+    min-width: 300px;
+}
+
+.part-select:hover {
+    border-color: var(--accent-1);
+    box-shadow: 0 2px 8px rgba(211, 47, 47, 0.1);
+}
+
+.part-select:focus {
+    border-color: var(--accent-1);
+    box-shadow: 0 0 0 3px rgba(211, 47, 47, 0.1);
+}
+
+.quiz-controls, .flash-controls {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.quiz-controls button, .flash-controls button {
+    padding: 8px 16px;
+    border: 1px solid #e0e0e0;
+    background: white;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.quiz-controls button:hover:not(:disabled),
+.flash-controls button:hover:not(:disabled) {
+    background: var(--accent-1);
+    color: white;
+    border-color: var(--accent-1);
+}
+
+.quiz-controls button:disabled,
+.flash-controls button:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.quiz-complete, .flashcard-complete {
+    text-align: center;
+    padding: 40px 20px;
+}
+
+.quiz-complete h3, .flashcard-complete h3 {
+    color: var(--accent-1);
+    margin-bottom: 10px;
+}
+
+.quiz-complete button, .flashcard-complete button {
+    margin: 5px;
+    padding: 10px 20px;
+    border: none;
+    background: var(--accent-1);
+    color: white;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.quiz-complete button:hover, .flashcard-complete button:hover {
+    background: var(--accent-2);
+    transform: translateY(-2px);
+}
