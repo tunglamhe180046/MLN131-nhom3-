@@ -154,7 +154,7 @@ const contentData = [
     }
 ];
 
-// ===== QUIZ =====
+//
 // ===== QUIZ =====
 const quizDataByPart = {
     phan1: [
@@ -199,34 +199,63 @@ const quizDataByPart = {
 };
 
 // ===== FLASHCARDS THEO PHẦN =====
+// ===== FLASHCARDS THEO PHẦN =====
 const flashcardsByPart = {
     phan1: [
         { front: "Bỏ qua TBCN nghĩa là gì?", back: "Bỏ qua việc xác lập vị trí thống trị của quan hệ sản xuất TBCN." },
         { front: "Tính tất yếu của quá độ lên CNXH?", back: "Là sự lựa chọn duy nhất, đúng đắn, khoa học, phù hợp quy luật lịch sử và nguyện vọng nhân dân." },
-        { front: "Mục tiêu đến năm 2045?", back: "Việt Nam trở thành nước phát triển, thu nhập cao." }
+        { front: "Mục tiêu đến năm 2045?", back: "Việt Nam trở thành nước phát triển, thu nhập cao." },
+        { front: "Khó khăn lớn nhất khi VN quá độ lên CNXH?", back: "Hậu quả chiến tranh kéo dài, tàn dư thực dân phong kiến, phát triển kinh tế kém, xuất phát điểm thấp." },
+        { front: "Thuận lợi lớn nhất khi VN quá độ lên CNXH?", back: "Thời đại quá độ từ TBCN lên CNXH, thành tựu khoa học-kỹ thuật, sự lãnh đạo của Đảng." },
+        { front: "Cương lĩnh 1930 đã xác định điều gì?", back: "Xác định con đường quá độ lên CNXH bỏ qua chế độ TBCN." }
     ],
     phan2: [
-        { front: "8 đặc trưng CNXH?", back: "Dân giàu, nước mạnh, dân chủ, công bằng, văn minh..." },
-        { front: "Đặc trưng kinh tế CNXH Việt Nam?", back: "Kinh tế phát triển cao dựa trên lực lượng sản xuất hiện đại, quan hệ sản xuất tiến bộ." }
+        { front: "8 đặc trưng CNXH?", back: "Dân giàu, nước mạnh, dân chủ, công bằng, văn minh; Do nhân dân làm chủ; Kinh tế phát triển cao; Văn hóa tiên tiến; Con người ấm no; Các dân tộc bình đẳng; Nhà nước pháp quyền XHCN; Hợp tác quốc tế." },
+        { front: "Đặc trưng kinh tế CNXH Việt Nam?", back: "Kinh tế phát triển cao dựa trên lực lượng sản xuất hiện đại, quan hệ sản xuất tiến bộ." },
+        { front: "Đặc trưng chính trị CNXH Việt Nam?", back: "Do nhân dân làm chủ, Nhà nước pháp quyền XHCN do Đảng lãnh đạo." },
+        { front: "Đặc trưng văn hóa CNXH Việt Nam?", back: "Văn hóa tiên tiến, đậm đà bản sắc dân tộc." },
+        { front: "Mục tiêu tổng quát của CNXH Việt Nam?", back: "Dân giàu, nước mạnh, dân chủ, công bằng, văn minh." }
     ],
     phan3: [
-        { front: "3 phương hướng xây dựng CNXH?", back: "CNH-HĐH, Kinh tế thị trường XHCN, Văn hóa - Con người." }
+        { front: "3 phương hướng xây dựng CNXH?", back: "CNH-HĐH, Kinh tế thị trường XHCN, Văn hóa - Con người." },
+        { front: "Nội dung của CNH-HĐH?", back: "Ưu tiên công nghiệp nặng, công nghệ cao; Nông nghiệp ứng dụng công nghệ; Hội nhập quốc tế, giữ độc lập tự chủ." },
+        { front: "Kinh tế thị trường định hướng XHCN có mấy thành phần?", back: "Nhiều thành phần kinh tế, trong đó kinh tế nhà nước giữ vai trò chủ đạo." },
+        { front: "Vai trò của kinh tế nhà nước?", back: "Giữ vai trò chủ đạo trong nền kinh tế." },
+        { front: "Mục tiêu xây dựng văn hóa - con người?", back: "Văn hóa tiên tiến, bản sắc dân tộc; Giải quyết việc làm, an sinh xã hội, chăm sóc sức khỏe." }
     ],
     phan4: [
-        { front: "Nguồn gốc từ 'Dân chủ'?", back: "Từ Hy Lạp cổ: Demos (nhân dân) + Kratos (cai trị) = Nhân dân làm chủ." }
+        { front: "Nguồn gốc từ 'Dân chủ'?", back: "Từ Hy Lạp cổ: Demos (nhân dân) + Kratos (cai trị) = Nhân dân làm chủ." },
+        { front: "Theo Mác-Lênin, dân chủ là gì?", back: "Dân chủ là quyền lực của nhân dân." },
+        { front: "Dân chủ với tư cách là hình thái nhà nước?", back: "Là hình thái nhà nước của giai cấp cầm quyền." },
+        { front: "Dân chủ với tư cách là nguyên tắc tổ chức?", back: "Là nguyên tắc tập trung dân chủ." },
+        { front: "Bản chất của dân chủ theo quan điểm Mác-Lênin?", back: "Dân chủ mang tính giai cấp, phục vụ lợi ích của giai cấp thống trị." }
     ],
     phan5: [
         { front: "Dân chủ XHCN là gì?", back: "Quyền lực thuộc đại đa số nhân dân lao động." },
         { front: "Dân chủ XHCN khác dân chủ tư sản?", back: "Dân chủ XHCN: của đa số nhân dân lao động. Dân chủ tư sản: của thiểu số tư bản." },
-        { front: "Cách mạng Tháng Mười 1917?", back: "Mở ra thời đại dân chủ XHCN, do Lênin lãnh đạo." }
+        { front: "Cách mạng Tháng Mười 1917?", back: "Mở ra thời đại dân chủ XHCN, do Lênin lãnh đạo." },
+        { front: "Dân chủ nguyên thủy có đặc điểm gì?", back: "Họp toàn dân, bầu thủ lĩnh." },
+        { front: "Dân chủ chủ nô là gì?", back: "Dân chủ chỉ dành cho chủ nô, nô lệ không có quyền." },
+        { front: "Dân chủ tư sản có hạn chế gì?", back: "Chỉ là dân chủ hình thức, thực chất phục vụ lợi ích giai cấp tư sản." }
     ],
     phan6: [
-        { front: "Bản chất chính trị dân chủ XHCN?", back: "Chủ thể là nhân dân lao động, do Đảng Cộng sản lãnh đạo, mục tiêu giải phóng con người." }
+        { front: "Bản chất chính trị dân chủ XHCN?", back: "Chủ thể là nhân dân lao động, do Đảng Cộng sản lãnh đạo, mục tiêu giải phóng con người." },
+        { front: "Dân chủ XHCN ra đời sau sự kiện nào?", back: "Sau Cách mạng Tháng Mười Nga 1917." },
+        { front: "Ai lãnh đạo Cách mạng Tháng Mười?", back: "Lênin." },
+        { front: "Chủ thể của dân chủ XHCN là ai?", back: "Nhân dân lao động." },
+        { front: "Hình thức thực hiện dân chủ XHCN?", back: "Dân chủ trực tiếp và dân chủ gián tiếp." },
+        { front: "Vai trò của Đảng trong dân chủ XHCN?", back: "Đảng Cộng sản giữ vai trò lãnh đạo." },
+        { front: "Mục tiêu cơ bản của dân chủ XHCN?", back: "Giải phóng con người, xóa bỏ chế độ người bóc lột người." }
     ],
     phan7: [
         { front: "Bản chất kinh tế dân chủ XHCN?", back: "Công hữu tư liệu sản xuất chủ yếu, phân phối theo lao động." },
         { front: "Nền tảng tư tưởng dân chủ XHCN?", back: "Chủ nghĩa Mác-Lênin." },
-        { front: "Đặc điểm văn hóa XHCN Việt Nam?", back: "Tiên tiến, đậm đà bản sắc dân tộc, kế thừa tinh hoa nhân loại." }
+        { front: "Đặc điểm văn hóa XHCN Việt Nam?", back: "Tiên tiến, đậm đà bản sắc dân tộc, kế thừa tinh hoa nhân loại." },
+        { front: "Nguyên tắc phân phối trong CNXH?", back: "Phân phối theo lao động." },
+        { front: "Mục đích của nền kinh tế XHCN?", back: "Thỏa mãn nhu cầu vật chất và tinh thần ngày càng cao của nhân dân." },
+        { front: "Tính chất của quan hệ sản xuất XHCN?", back: "Dựa trên chế độ công hữu về tư liệu sản xuất chủ yếu." },
+        { front: "Vai trò của văn hóa trong XHCN?", back: "Văn hóa là nền tảng tinh thần của xã hội, động lực phát triển." },
+        { front: "Thái độ với di sản văn hóa nhân loại?", back: "Kế thừa có chọn lọc những tinh hoa văn hóa nhân loại." }
     ]
 };
 
